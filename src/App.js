@@ -1,13 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+    const [dice,setDice] = useState(1);
+    const btnRoll = () => {
+      setDice( Math.floor(Math.random() * 6) + 1);
+    };
+
+
   return (
     <div className="App">
       
       <div id="logo">
       <img
-        src="/img/logo-dice.png"
+        src="/img/logoDice.svg"
         alt="Pigy"
       />
       <h1>Rolling Dice</h1>
@@ -16,12 +22,12 @@ function App() {
       <div id="left_side">
         <h1>Player 1</h1>
         <div class="current_score current_score_0">22</div>
-        <button class="btn btn_roll_0">Button Roll</button>
+        <button class="btn btn_roll_0" onClick={btnRoll}>Button Roll</button>
         <button class="btn btn_hold">Button Hold</button>
       </div>
       <div id="mid_content">
         <button class="btn btn_newgame">New Game</button>
-        <img src="img/dice-1.png" alt="Dice" class="dice_img" />
+        <img src={"img/dice-" + dice + ".png"} alt="Dice" class="dice_img" />
         <p>All Rights Reserved &copy;</p>
       </div>
 

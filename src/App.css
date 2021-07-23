@@ -39,9 +39,15 @@
   font-family: 'Shippori Mincho', serif;
   letter-spacing: 0.26rem;
   cursor: pointer;
+  transition: transform .2s;
 }
 .btn:hover {
-  color: blue;
+  color: green;
+  transform: scale(1.15);
+}
+.btn:active {
+  color: rgb(1, 44, 1);
+  
 }
 
 .hidden {
