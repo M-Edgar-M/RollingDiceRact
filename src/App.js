@@ -1,30 +1,30 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 
 function App() {
-  let score = {
-    player_1: 0,
-    player_2: 0
-  }
 
   let [currentScore, setCurrentScore] = useState(0);
-  let [currentPlayer, setCurrentPlayer] = useState(1);
+  let [currentPlayer, setCurrentPlayer] = useState(0);
   let [firstPlayerScore, setFirstPlayerScore] = useState(0);
   let [secondPlayerScore, setSecondPlayerScore] = useState(0);
+  const [disable, setDisable] = useState(false);
+  // const playerOneBtn = useRef(true);
+  // const playerSecondBtn = useRef(false);
   let dice;
 
 
     const btnRoll = () => {
         dice = Math.floor(Math.random() * 6) + 1;
       
-      if(dice != 2) {
+      if(dice !== 2) {
        setCurrentScore(currentScore += dice);
        
       } else {
-        if(currentPlayer === 1) {
-          setCurrentPlayer(2);
-        } else {
+        if(currentPlayer === 0) {
           setCurrentPlayer(1);
+        } else if(currentPlayer === 1) {
+          setCurrentPlayer(0);
+
         }
           setCurrentScore(0);
       }
@@ -32,24 +32,25 @@ function App() {
 
     const btnHold = () => {
       if(currentPlayer === 1) {
-        setFirstPlayerScore(currentScore);
         setCurrentScore(0);
-        setCurrentPlayer(2);
+        setFirstPlayerScore(firstPlayerScore += currentScore);
+        setCurrentPlayer(1)
+
       } else {
-        setSecondPlayerScore(currentScore);
+        setSecondPlayerScore(secondPlayerScore += currentScore);
         setCurrentScore(0);
-        setCurrentPlayer(1);
+        setCurrentPlayer(0)
+
       }
+      
     };
 
 
 
-    console.log("Score is " + currentScore);
+    console.log("Current Score is " + currentScore);
     console.log("Current Player is  " + currentPlayer);
     console.log(firstPlayerScore);
     console.log(secondPlayerScore);
-  
-    
     
 
 
@@ -66,26 +67,26 @@ function App() {
     <div id="content-wrapper">
       <div id="left_side">
         <h1>Player 1</h1>
-        <div class="current_score current_score_0">55</div>
-        <button class="btn btn_roll_0" onClick={btnRoll}>Button Roll</button>
-        <button class="btn btn_hold"onClick={btnHold}>Button Hold</button>
+        <div className="current_score current_score_0">55</div>
+        <button className="btn btn_roll_0" onClick={btnRoll} disabled={disable}>Button Roll</button>
+        <button className="btn btn_hold"onClick={btnHold} disabled={disable}>Button Hold</button>
       </div>
       <div id="mid_content">
-        <button class="btn btn_newgame">New Game</button>
-        <img src='img/dice-4.png' alt="Dice" class="dice_img" />
+        <button className="btn btn_newgame">New Game</button>
+        <img src='img/dice-4.png' alt="Dice" className="dice_img" />
         <p>All Rights Reserved &copy;</p>
       </div>
 
       <div id="right_side">
         <h1>Player 2</h1>
-        <div class="current_score current_score_1">0</div>
-        <button class="btn btn_roll_1">Button Roll</button>
-        <button class="btn btn_hold">Button Hold</button>
+        <div className="current_score current_score_1">0</div>
+        <button className="btn btn_roll_1" onClick={btnRoll} disabled={disable}>Button Roll</button>
+        <button className="btn btn_hold" onClick={btnHold} disabled={disable}>Button Hold</button>
       </div>
     </div>
 
     <footer>
-      <div class="footer">
+      <div className="footer">
         <p>
           Player Rolls the Dice, if it's not 2, the game continuous and the
           Player can Hold the Score untill he gets 101. If Dice is 1 then Player

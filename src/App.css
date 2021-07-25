@@ -45,8 +45,17 @@
   color: green;
   transform: scale(1.15);
 }
+.btn:hover[disabled] {
+  color:grey;
+  transform: scale(1);
+}
 .btn:active {
   color: rgb(1, 44, 1);
+  
+}
+.btn:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
   
 }
 
