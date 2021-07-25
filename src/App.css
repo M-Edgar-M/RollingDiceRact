@@ -158,6 +158,14 @@
   text-align: center;
 }
 
+.currentScoreDisplay {
+  position: absolute;
+  bottom: 32rem;
+  font-size: 4rem;
+  border-bottom: 0.2rem solid #000;
+  
+}
+
 
 #right_side {
   width: 40%;
@@ -222,4 +230,8 @@ footer {
 
 .footer p {
   padding-top: 0.5rem;
+}
+
+.hidden {
+  display: none;
 }

@@ -1,31 +1,34 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   let [currentScore, setCurrentScore] = useState(0);
   let [currentPlayer, setCurrentPlayer] = useState(0);
   let [firstPlayerScore, setFirstPlayerScore] = useState(0);
   let [secondPlayerScore, setSecondPlayerScore] = useState(0);
+  let [dice,setDice] = useState(0);
   const [disable, setDisable] = useState(false);
-  // const playerOneBtn = useRef(true);
-  // const playerSecondBtn = useRef(false);
-  let dice;
+  
 
-  const btnRoll = () => {
-    dice = Math.floor(Math.random() * 6) + 1;
-
-    if (dice !== 2) {
-      setCurrentScore((currentScore += dice));
-    } else {
-      if (currentPlayer === 0) {
-        setCurrentPlayer(1);
-      } else if (currentPlayer === 1) {
-        setCurrentPlayer(0);
+    const btnRoll = () => {
+      setDice(Math.floor(Math.random() * 6) + 1);
+  
+      if (dice !== 2) {
+        setCurrentScore((currentScore += dice));
+      } else {
+        if (currentPlayer === 0) {
+          setCurrentPlayer(1);
+        } else if (currentPlayer === 1) {
+          setCurrentPlayer(0);
+        }
+        setCurrentScore(0);
+        setDisable(!disable);
       }
-      setCurrentScore(0);
-      setDisable(!disable);
-    }
-  };
+    };
+    
+  
+
+  
 
   const btnHold = () => {
     if (currentPlayer === 0) {
@@ -41,10 +44,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    
-    
-  },firstPlayerScore, secondPlayerScore)
 
   // console.log("Current Score is " + currentScore);
   // console.log("Current Player is  " + currentPlayer);
@@ -74,7 +73,8 @@ function App() {
         </div>
         <div id="mid_content">
           <button className="btn btn_newgame">New Game</button>
-          <img src="img/dice-4.png" alt="Dice" className="dice_img" />
+          <img src={`img/dice-${dice}.png`} alt="Dice" className="dice_img"/>
+          <div className="currentScoreDisplay">{currentScore}</div>
           <p>All Rights Reserved &copy;</p>
         </div>
 
