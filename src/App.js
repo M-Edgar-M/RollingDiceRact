@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 function App() {
   let [currentScore, setCurrentScore] = useState(0);
@@ -9,24 +9,28 @@ function App() {
   let [dice,setDice] = useState(0);
   const [disable, setDisable] = useState(false);
   
+  
 
     const btnRoll = () => {
-      setDice(Math.floor(Math.random() * 6) + 1);
-  
-      if (dice !== 2) {
-        setCurrentScore((currentScore += dice));
+      const randomDice = Math.floor(Math.random() * 6) + 1;
+      setDice(randomDice);
+
+      if (randomDice !== 2) {
+        setCurrentScore((currentScore += randomDice));
       } else {
         if (currentPlayer === 0) {
           setCurrentPlayer(1);
         } else if (currentPlayer === 1) {
           setCurrentPlayer(0);
         }
-        setCurrentScore(0);
         setDisable(!disable);
+        setCurrentScore(0);
       }
     };
     
-  
+  const newGame = () => {
+    
+  }
 
   
 
